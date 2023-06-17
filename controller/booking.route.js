@@ -90,6 +90,19 @@ bookingRoute.patch("/request/:bookingID", authMiddleWare , async(req,res)=>{
   }
 })
 
+//cancel order by client
+bookingRoute.patch("/cancel/:bookingID", authMiddleWare , async(req,res)=>{
+  try {
+    const bookingID = req.params.bookingID;
+    const payload = req.body;
+    await BookingModel.findByIdAndUpdate({ "_id": bookingID }, payload)
+    res.status(200).json({ ok: true, message: "Booking Cancelled!" });
+  }
+  catch (error) {
+    res.status(500).json({ ok: false, message: err.message });
+  }
+})
+
 
 
 
