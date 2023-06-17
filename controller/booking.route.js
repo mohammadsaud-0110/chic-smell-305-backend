@@ -7,7 +7,7 @@ const bookingRoute = express.Router();
 
 
 //get all booking order with client and trainer name
-bookingRoute.get("/", authMiddleWare, async(req,res)=>{
+bookingRoute.get("/", async(req,res)=>{
     try {
         let data = await BookingModel.find().populate("trainer client","name");
         res.status(200).json({ data, ok: true });
